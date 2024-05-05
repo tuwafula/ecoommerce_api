@@ -1,40 +1,45 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
+from accounts.models import User
 
-class User(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    is_vendor = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+# class User(models.Model):
+#     name = models.CharField(max_length=255)
+#     email = models.EmailField(unique=True)
+#     password = models.CharField(max_length=100)
+#     is_vendor = models.BooleanField(default=False)
+#     is_admin = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-class Vendor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='vendor')
-    bio = models.TextField()
-    contact_details = models.TextField()
-    bank_details = models.TextField()
-    shipping_policy = models.TextField()
-    return_policy = models.TextField()
+# class Vendor(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='vendor')
+#     bio = models.TextField()
+#     contact_details = models.TextField()
+#     bank_details = models.TextField()
+#     shipping_policy = models.TextField()
+#     return_policy = models.TextField()
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=100, unique=True)
+    # slug = models.SlugField(max_length=100, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
 
     def __str__(self):
         return self.name
 
+def upload_to(instance, filename):
+    return 'product/{filename}'.format(filename=filename)
+
 class Product(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='product')
+    # vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='product')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=100, decimal_places=2)
-    stock = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='product')
+    quantity = models.PositiveIntegerField()
+    image = CloudinaryField('image')
+    barcode = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
