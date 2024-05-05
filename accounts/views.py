@@ -50,14 +50,14 @@ class LoginView(APIView):
         
         response = Response()
 
-        response.set_cookie(key='jwt', value=token, httponly=True)
+        # response.set_cookie(key='jwt', value=token, httponly=True)
 
         # response.data = {'jwt' : token}
 
         if user.is_staff:
             response.data = {'jwt' : token, 'userType' : 'ADMIN'}
         else: 
-            response.data = {'jwt' : token}
+            response.data = {'jwt' : token, 'userType' : 'REGULAR'}
 
         return response
         
