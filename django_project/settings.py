@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -97,7 +98,7 @@ DATABASES = {
 
 database_url = os.environ.get("DATABASE_URL")
 
-# DATABASES["default"] = dj_database_url.parse("postgres://lms_api_user:s7k8AUpUyuI1kgKnV4rrCw5fjodqWCtJ@dpg-coqceiv79t8c738ea900-a.oregon-postgres.render.com/lms_api")
+# DATABASES["default"] = dj_database_url.parse("postgres://ecommerce_api_el23_user:ApKxWyq96gVmkx5yiyKFKGcKiRbAZWPw@dpg-corr10i0si5c739l22s0-a.oregon-postgres.render.com/ecommerce_api_el23")
 
 DATABASES["default"] = dj_database_url.parse(database_url)
 
