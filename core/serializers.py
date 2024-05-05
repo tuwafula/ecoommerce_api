@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    User, Vendor, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
+    User, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
     )
 
 
@@ -9,10 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-class VendorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vendor
-        fields = '__all__'
+# class VendorSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Vendor
+#         fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,7 +21,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
-    vendor = VendorSerializer(read_only=True)
+    # vendor = VendorSerializer(read_only=True)
 
     class Meta:
         model = Product

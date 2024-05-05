@@ -1,18 +1,18 @@
 from rest_framework import viewsets
 from .models import (
-    User, Vendor, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
+    User, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
     )
 from .serializers import (
-    UserSerializer, VendorSerializer, CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer, CartItemSerializer, CartSerializer, ShippingSerializer, PaymentSerializer, CouponSerializer, WishlistSerializer, NotificationSerializer, BlogSerializer, ConfigurationSerializer, ContactSerializer, FAQSerializer, TaxSerializer, SubscriptionSerializer, RefundSerializer, ReviewSerializer, AnalyticsSerializer
+    UserSerializer, CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer, CartItemSerializer, CartSerializer, ShippingSerializer, PaymentSerializer, CouponSerializer, WishlistSerializer, NotificationSerializer, BlogSerializer, ConfigurationSerializer, ContactSerializer, FAQSerializer, TaxSerializer, SubscriptionSerializer, RefundSerializer, ReviewSerializer, AnalyticsSerializer
 )
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class VendorViewSet(viewsets.ModelViewSet):
-    queryset = Vendor.objects.all()
-    serializer_class = VendorSerializer
+# class VendorViewSet(viewsets.ModelViewSet):
+#     queryset = Vendor.objects.all()
+#     serializer_class = VendorSerializer
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

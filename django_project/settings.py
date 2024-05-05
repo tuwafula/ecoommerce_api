@@ -171,7 +171,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/build/media/')
 
-
 CLOUDINARY = {
     'cloud_name' : 'dz9wzvgbd',
     'api_key': '865245918443586',
