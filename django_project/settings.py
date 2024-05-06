@@ -98,7 +98,7 @@ DATABASES = {
 
 database_url = os.environ.get("DATABASE_URL")
 
-# DATABASES["default"] = dj_database_url.parse("postgres://ecommerce_api_el23_user:ApKxWyq96gVmkx5yiyKFKGcKiRbAZWPw@dpg-corr10i0si5c739l22s0-a.oregon-postgres.render.com/ecommerce_api_el23")
+# DATABASES["default"] = dj_database_url.parse("postgres://ecommerce_database_q6q7_user:KPoUBYfb0m6cLiw75CUrzl06aVqNliL0@dpg-cos84ui1hbls73ffojh0-a.oregon-postgres.render.com/ecommerce_database_q6q7")
 
 DATABASES["default"] = dj_database_url.parse(database_url)
 

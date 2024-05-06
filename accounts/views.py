@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .serializers import UserSerializer
+from rest_framework.generics import GenericAPIView
+from .serializers import UserSerializer, ChangePasswordSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed, status
 from .models import User
@@ -30,6 +31,7 @@ class LoginView(APIView):
 
         user = User.objects.filter(email=email).first()
 
+        print(user)
         if user is None:
             raise AuthenticationFailed('User not found!')
         
@@ -84,3 +86,29 @@ class GetUserView(APIView):
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+
+####################################################################
+################################################
+#########################################
+########################
+#change password
+
+
+
+
+class ChangePassword(GenericAPIView):
+    serializer_class = ChangePasswordSerializer
+
+    def put(self, request, id):
+        password = request.data.get('password')
+        new_password = request.data.get('new_password')
+
+        obj = User.objects.get(pk=id)
+        print(obj)
+        if not obj.check_password(raw_password=password):
+            return Response({'error': 'password do not match'}, status=400)
+        else:
+            obj.set_password(new_password)
+            obj.save()
+            return Response({'success': 'password changed successfully'}, status=200)

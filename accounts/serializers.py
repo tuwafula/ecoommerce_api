@@ -17,3 +17,8 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+
+class ChangePasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
