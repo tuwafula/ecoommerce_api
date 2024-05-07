@@ -6,6 +6,9 @@ from .serializers import (
     UserSerializer, CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer, CartItemSerializer, CartSerializer, ShippingSerializer, PaymentSerializer, CouponSerializer, WishlistSerializer, NotificationSerializer, BlogSerializer, ConfigurationSerializer, ContactSerializer, FAQSerializer, TaxSerializer, SubscriptionSerializer, RefundSerializer, ReviewSerializer, AnalyticsSerializer
 )
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -93,3 +96,14 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
 class RefundViewSet(viewsets.ModelViewSet):
     queryset = Refund.objects.all()
     serializer_class = RefundSerializer
+
+class DashboardView(APIView):
+
+    def get(self, request):
+        users_count = User.objects.count()
+        orders_count = Order.objects.count()
+        products_count = Product.objects.count()
+        categories_count = Category.objects.count()
+
+        return Response({'data': {'users': users_count, 'orders':orders_count, 'products':products_count, 'categories':categories_count}})
+

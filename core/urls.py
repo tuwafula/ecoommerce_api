@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from .views import (
-    UserViewSet, CategoryViewSet, ProductViewSet, OrderItemViewSet, OrderViewSet, CartViewSet, CartItemViewSet, ShippingViewSet, PaymentViewSet, CouponViewSet, ReviewViewSet, WishlistViewSet, NotificationViewSet, BlogViewSet, ContactViewSet, FAQViewSet, AnalyticsViewSet, ConfigurationViewSet, TaxViewSet, SubscriptionViewSet, RefundViewSet
+    UserViewSet, CategoryViewSet, ProductViewSet, OrderItemViewSet, OrderViewSet, CartViewSet, CartItemViewSet, ShippingViewSet, PaymentViewSet, CouponViewSet, ReviewViewSet, WishlistViewSet, NotificationViewSet, BlogViewSet, ContactViewSet, FAQViewSet, AnalyticsViewSet, ConfigurationViewSet, TaxViewSet, SubscriptionViewSet, RefundViewSet, DashboardView
 )
 
 router = routers.DefaultRouter()
@@ -30,4 +30,5 @@ router.register(r'analytics', AnalyticsViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('dashboard/', DashboardView.as_view())
 ]
