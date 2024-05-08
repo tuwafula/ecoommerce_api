@@ -22,6 +22,7 @@ from accounts.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(null=True, blank=True)
     # slug = models.SlugField(max_length=100, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
 
