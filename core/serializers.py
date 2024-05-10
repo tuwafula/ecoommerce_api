@@ -1,3 +1,4 @@
+import random, string
 from rest_framework import serializers
 from .models import (
     User, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
@@ -37,7 +38,7 @@ class OrderSerializer2(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['customer', 'shipping_address', 'products', 'total_price']
+        fields = ['id', 'name', 'customer', 'shipping_address', 'products', 'total_price']
 
     def get_products(self, obj):
         order_items = obj.item.all()
@@ -59,6 +60,11 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         products_data = validated_data.pop('products')
+
+        order_name = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+        validated_data['name'] = f"Order-# {order_name}"
+
         order = Order.objects.create(**validated_data)
 
         total_price = 0  

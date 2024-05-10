@@ -26,6 +26,9 @@ class Category(models.Model):
     # slug = models.SlugField(max_length=100, unique=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -44,16 +47,23 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-created_at', '-updated_at']
+
     def __str__(self):
         return self.name
     
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     products = models.ManyToManyField(Product, through='OrderItem')
+    name = models.CharField(max_length=255, null=True, blank=True)
     total_price = models.DecimalField(max_digits=100, decimal_places=2)
     shipping_address = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at', '-updated_at']
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='item')
