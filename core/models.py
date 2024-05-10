@@ -60,6 +60,7 @@ class Order(models.Model):
     status = models.CharField(max_length=255, default='pending')
     total_price = models.DecimalField(max_digits=100, decimal_places=2)
     shipping_address = models.TextField()
+    city = models.CharField(max_length=255, default='Nairobi')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

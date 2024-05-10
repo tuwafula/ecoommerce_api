@@ -38,7 +38,7 @@ class OrderSerializer2(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'name', 'customer', 'shipping_address', 'products', 'total_price', 'status']
+        fields = ['id', 'name', 'customer', 'shipping_address', 'city', 'products', 'total_price', 'status']
 
     def get_products(self, obj):
         order_items = obj.item.all()
