@@ -38,16 +38,18 @@ class OrderSerializer2(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'name', 'customer', 'shipping_address', 'city', 'products', 'total_price', 'status']
+        fields = ['id', 'name', 'customer', 'shipping_address', 'city', 'products', 'total_price', 'status', 'created_at', 'updated_at']
 
     def get_products(self, obj):
         order_items = obj.item.all()
         serialized_items = []
         for item in order_items:
             serialized_item = {
-                'product': item.product.id,
+                'product': ProductSerializer(item.product).data,
                 'quantity': item.quantity
             }
+
+            
             serialized_items.append(serialized_item)
         return serialized_items
 
@@ -56,7 +58,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['customer', 'shipping_address', 'products', 'total_price']
+        fields = ['customer', 'shipping_address', 'city', 'products', 'total_price']
 
     def create(self, validated_data):
         products_data = validated_data.pop('products')

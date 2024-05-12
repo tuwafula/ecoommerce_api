@@ -67,6 +67,9 @@ class Order(models.Model):
     class Meta:
         ordering = ['-created_at', '-updated_at']
 
+    def __str__(self):
+        return self.name
+
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='item')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
