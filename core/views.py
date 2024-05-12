@@ -3,7 +3,7 @@ from .models import (
     User, Category, Product, Order, OrderItem, Cart, CartItem, Shipping, Payment, Coupon, Review, Wishlist, Notification, Blog, Configuration, Contact, FAQ, Tax, Subscription,Refund, Analytics
     )
 from .serializers import (
-    UserSerializer, CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer, CartItemSerializer, CartSerializer, ShippingSerializer, PaymentSerializer, CouponSerializer, WishlistSerializer, NotificationSerializer, BlogSerializer, ConfigurationSerializer, ContactSerializer, FAQSerializer, TaxSerializer, SubscriptionSerializer, RefundSerializer, ReviewSerializer, AnalyticsSerializer, OrderSerializer2
+    UserSerializer, CategorySerializer, ProductSerializer, OrderSerializer, OrderItemSerializer, CartItemSerializer, CartSerializer, ShippingSerializer, PaymentSerializer, CouponSerializer, WishlistSerializer, NotificationSerializer, BlogSerializer, ConfigurationSerializer, ContactSerializer, FAQSerializer, TaxSerializer, SubscriptionSerializer, RefundSerializer, ReviewSerializer, AnalyticsSerializer, OrderSerializer2, OrderSerializer3
 )
 
 from rest_framework.views import APIView
@@ -32,6 +32,10 @@ class OrderViewSet(viewsets.ModelViewSet):
 class OrderViewSet2(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer2
+
+class OrderViewSet3(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer3
 
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
