@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
-from .serializers import UserSerializer, ChangePasswordSerializer
+from .serializers import UserSerializer, ChangePasswordSerializer, GetUsersSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed, status
 from .models import User
@@ -115,7 +115,7 @@ class ChangePassword(GenericAPIView):
 
 
 class GetUsers(APIView):
-    serializer_class = UserSerializer
+    serializer_class = GetUsersSerializer
 
     def get(self, request):
         users = User.objects.all()
