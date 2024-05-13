@@ -44,7 +44,7 @@ class LoginView(APIView):
         
         payload = {
            'id': uuid_str,
-           'exp': datetime.now(timezone.utc) + timedelta(minutes=60)
+           'exp': datetime.now(timezone.utc) + timedelta(minutes=1440)
         }
 
 
@@ -112,3 +112,12 @@ class ChangePassword(GenericAPIView):
             obj.set_password(new_password)
             obj.save()
             return Response({'success': 'password changed successfully'}, status=200)
+
+
+class GetUsers(APIView):
+    serializer_class = UserSerializer
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = self.serializer_class(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
